@@ -6,6 +6,7 @@ import urllib
 import argparse
 import os
 
+
 def get_dom_id(node: Section):
     """
     Get the DOM ID in `print.html`.
@@ -93,13 +94,29 @@ def main():
         prog="mdbook_pdf_summary", description="Add outline to the PDF file."
     )
     parser.add_argument(
-        "--html_path", type=str, help="path of the `print.html` generated `mdbook-pdf`"
+        "--html_path",
+        type=str,
+        help="path of the `print.html` generated `mdbook-pdf`",
+        default="book/html/print.html",
     )
     parser.add_argument(
-        "--pdf_path", type=str, help="path of the `output.pdf` generated `mdbook-pdf`"
+        "--pdf_path",
+        type=str,
+        help="path of the `output.pdf` generated `mdbook-pdf`",
+        default="book/pdf/output.pdf",
     )
-    parser.add_argument("--summary_path", type=str, help="path of the `SUMMARY.md`")
-    parser.add_argument("--output_path", type=str, help="path of the output PDF file", default="output_with_outline.pdf")
+    parser.add_argument(
+        "--summary_path",
+        type=str,
+        help="path of the `SUMMARY.md`",
+        default="src/SUMMARY.md",
+    )
+    parser.add_argument(
+        "--output_path",
+        type=str,
+        help="path of the output PDF file",
+        default="output_with_outline.pdf",
+    )
     args = parser.parse_args()
     print("============ args =============")
     print("args.html_path: ", args.html_path)
@@ -112,7 +129,7 @@ def main():
         raise FileNotFoundError(f"{args.pdf_path} does not exist")
     if not os.path.exists(args.summary_path):
         raise FileNotFoundError(f"{args.summary_path} does not exist")
-    
+
     reader = pypdf.PdfReader(args.pdf_path)
     writer = pypdf.PdfWriter()
     writer.append(reader)

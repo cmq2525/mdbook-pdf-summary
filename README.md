@@ -35,9 +35,15 @@ popd
 ```
 #### 2. Generate outline based on  `SUMMARY.md`
 ```bash
-mdbook-pdf-summary --html_path ./example/a_book/book/html/print.html \
---pdf_path ./example/a_book/book/pdf/output.pdf \
---summary_path ./example/a_book/src/SUMMARY.md \
---output_path ./output_with_outline.pdf 
+mdbook-pdf-summary --html_path ./example/a_book/book/html/print.html --pdf_path ./example/a_book/book/pdf/output.pdf      --summary_path ./example/a_book/src/SUMMARY.md --output_path ./output_with_outline.pdf 
 ```
+
+Or, use docker image:
+```bash
+pushd example/a_book
+docker run --rm -v $PWD:/book cmq2525/mdbook_pdf_summary:0.1.0 
+popd
+```
+
 The above command will generate `output_with_outline.pdf` in your `$WORKDIR`, the outline is like: [summary_outline](./data/summary_outline.png), same as `SUMMARY.md`
+
